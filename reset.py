@@ -6,7 +6,10 @@ import re
 
 # Constants
 stop_script = 'scripts/stop.sh'
+install_script = 'scripts/install.sh'
 saving_folder = 'nessus_reports'
+
+nessus_deb_location = 'Nessus.deb'
 proxies_list = 'https://raw.githubusercontent.com/stamparm/aux/master/fetch-some-list.txt'
 
 # Step 1 : SAVE -    download all *.nessus reports
@@ -33,6 +36,14 @@ def stop():
     print("Stopping Nessus daemon")
     try:
         result = subprocess.run(['sudo', 'bash', stop_script], check=True, capture_output=True, text=True)
+        print("Output:", result.stdout)
+    except subprocess.CalledProcessError as e:
+        print("Erreur :", e.stderr)
+
+def install():
+    print("Installing Nessus")
+    try:
+        result = subprocess.run(['sudo', 'bash', install_script, nessus_deb_location], check=True, capture_output=True, text=True)
         print("Output:", result.stdout)
     except subprocess.CalledProcessError as e:
         print("Erreur :", e.stderr)
