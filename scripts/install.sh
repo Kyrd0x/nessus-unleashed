@@ -1,2 +1,2 @@
-dpkg -i $1
+dpkg -i Nessus.deb
 systemctl enable --now nessusd.service

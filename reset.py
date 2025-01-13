@@ -9,7 +9,6 @@ stop_script = 'scripts/stop.sh'
 install_script = 'scripts/install.sh'
 saving_folder = 'nessus_reports'
 
-nessus_deb_location = 'Nessus.deb'
 proxies_list = 'https://raw.githubusercontent.com/stamparm/aux/master/fetch-some-list.txt'
 
 # Step 1 : SAVE -    download all *.nessus reports
@@ -31,6 +30,7 @@ def save():
         pass
     except subprocess.CalledProcessError as e:
         print("Erreur :", e.stderr)
+        exit(1)
 
 def stop():
     print("Stopping Nessus daemon")
@@ -39,17 +39,33 @@ def stop():
         print("Output:", result.stdout)
     except subprocess.CalledProcessError as e:
         print("Erreur :", e.stderr)
+        exit(1)
 
 def install():
 
-    # TODO : Check if checksum at file location is correct, else downlodad again to location
+    url = "https://www.tenable.com/downloads/api/v2/pages/nessus/files/Nessus-10.8.3-ubuntu1604_amd64.deb"
+    output_file = "Nessus.deb"
+
+    print("Downloading Nessus")
+    response = requests.get(url, stream=True)
+    if response.status_code == 200:
+        with open(output_file, "wb") as file:
+            for chunk in response.iter_content(chunk_size=8192):
+                file.write(chunk)
+        print(f"Downloaded to : {output_file}")
+    else:
+        print(f"Error during download : {response.status_code}")
+        exit(1)
+
+    # check if ok, maybe delete it once install is over
 
     print("Installing Nessus")
     try:
-        result = subprocess.run(['sudo', 'bash', install_script, nessus_deb_location], check=True, capture_output=True, text=True)
+        result = subprocess.run(['sudo', 'bash', install_script], check=True, capture_output=True, text=True)
         print("Output:", result.stdout)
     except subprocess.CalledProcessError as e:
         print("Erreur :", e.stderr)
+        exit(1)
 
 def get_new_code(proxy):
     random_first_name = ''.join(random.choice(string.ascii_letters) for _ in range(random.randint(5, 10)))
