@@ -41,6 +41,9 @@ def stop():
         print("Erreur :", e.stderr)
 
 def install():
+
+    # TODO : Check if checksum at file location is correct, else downlodad again to location
+
     print("Installing Nessus")
     try:
         result = subprocess.run(['sudo', 'bash', install_script, nessus_deb_location], check=True, capture_output=True, text=True)
