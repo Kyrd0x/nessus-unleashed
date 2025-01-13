@@ -1,7 +1,19 @@
 # nessus-unleashed
 Nessus Expert Re Installator
 
-# 
+# Functionnalities : 
+
+Init : Initial install (no save/delete needed)
+
+Uninstall : cqfd
+
+ReInstall : below 
+
+ReInstall + Scan : Reinstall and launch web scan(s?)
+
+
+# RE INSTALL PROCESS
+
 ## Step 1 : SAVE
 
 Download all *.nessus reports
