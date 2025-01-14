@@ -142,6 +142,14 @@ def restore():
         print("Erreur :", e.stderr)
         exit(1)
 
+def launch_scan(url):
+    print(f"Launching scan on {url}")
+    try:
+        # todo
+        pass
+    except subprocess.CalledProcessError as e:
+        print("Erreur :", e.stderr)
+        exit(1)
 
 def main():
     args = parseArgs()
@@ -156,6 +164,9 @@ def main():
         install()
         setup(new_code)
         restore()
+
+    if args.scan:
+        launch_scan(args.scan)
 
 
     print("Done")
