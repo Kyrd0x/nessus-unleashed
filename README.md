@@ -11,6 +11,19 @@ ReInstall : below
 
 ReInstall + Scan : Reinstall and launch web scan(s?)
 
+# Installation
+
+It's a simple Python tool, so
+
+```bash
+git clone https://github.com/Couscouz/nessus-unleashed
+cd nessus-unleashed
+python tool.py init
+```
+Make sure you have ```requests``` library, otherwise :
+```bash
+pip install requests
+```
 
 # RE INSTALL PROCESS
 
