@@ -1,3 +1,4 @@
+import argparse
 import subprocess
 import requests
 import random
@@ -123,19 +124,48 @@ def get_new_code(proxy):
         print("Request failed. Status code:", response.status_code)
         print("Response text:", response.text)
 
+def setup(new_code):
+    print("Setting up Nessus")
+    try:
+        # todo
+        pass
+    except subprocess.CalledProcessError as e:
+        print("Erreur :", e.stderr)
+        exit(1)
 
+def restore():
+    print("Restoring Nessus reports")
+    try:
+        # todo
+        pass
+    except subprocess.CalledProcessError as e:
+        print("Erreur :", e.stderr)
+        exit(1)
 
 
 def main():
-    proxy = get_proxy()
-    stop()
-    # save
+    args = parseArgs()
 
-    new_code = get_new_code(proxy)
+    if args.action == 'reset':
+        save()
+        stop()
 
-    # reinstall
+    if args.action == 'init' or args.action == 'reset':
+        proxy = get_proxy()
+        new_code = get_new_code(proxy)
+        install()
+        setup(new_code)
+        restore()
 
-    # re upload reports
+
+    print("Done")
+
+
+def parseArgs():
+    parser = argparse.ArgumentParser(description="Nessus Unleashed Tool")
+    parser.add_argument('action', choices=['init', 'reset'], help="Action to perform")
+    parser.add_argument('--scan', type=str, help="IP address to scan")
+    return parser.parse_args()
 
 if __name__ == '__main__':
     main()
