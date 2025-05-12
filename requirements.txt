@@ -1,0 +1,5 @@
+requests
+requests[socks]
+requests[security]
+cryptography
+stem

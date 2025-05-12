@@ -1,48 +1,60 @@
-# nessus-unleashed
-Nessus Expert Re Installator
+# Nessus License Key Generator
 
-# Functionnalities : 
+## Example
 
-Init : Initial install (no save/delete needed)
+*screenshot to put*
 
-Uninstall : cqfd
+## Installation
 
-ReInstall : below 
-
-ReInstall + Scan : Reinstall and launch web scan(s?)
-
-# Installation
-
-It's a simple Python tool, so
+First step is to setup **Tor**, for debian based system simply
 
 ```bash
-git clone https://github.com/Couscouz/nessus-unleashed
+sudo apt update && sudo apt install tor
+```
+
+Controller activation is necessary, from ```/etc/tor/torrc```, add or uncomment:
+```conf
+ControlPort 9051
+CookieAuthentication 1
+```
+
+Then you need to add your user to the tor group and reload the service for the previous changes to occur
+
+ ```bash
+sudo usermod -a -G debian-tor $USER
+sudo systemctl restart tor
+```
+
+Finally refresh your user session by re openning your shell
+
+Now clone the repo and setup a Python environment as usual
+
+```bash
+git clone https://github.com/Kyrd0x/nessus-unleashed
 cd nessus-unleashed
-python tool.py init
+
+python3 -m venv env
+source env/bin/activate
+pip install -r requirements.txt
 ```
-Make sure you have ```requests``` library, otherwise :
+
+## Usage
+
 ```bash
-pip install requests
+$ python3 generate_codes.py -h
+Usage: generate_codes.py [-h] [-q QUANTITY] [-t {essentials,pro,expert}] [-o OUTPUT_FILE]   
+
+This script allows you to generate Nessus License codes.
+
+Example :
+  python3 generate_codes.py -q 10 -t pro -o pro_codes.txt
+
+options:
+  -h, --help            show this help message and exit
+  -q QUANTITY
+                        Quantity to generate. (default: 5).
+  -t {essentials,pro,expert}
+                        Nessus License Type. [essentials, pro, expert] (default: Essential).
+  -o OUTPUT_FILE
+                        Output TXT file. (default: codes.txt).
 ```
-
-# RE INSTALL PROCESS
-
-## Step 1 : SAVE
-
-Download all *.nessus reports
-
-## Step 2 : STOP
-
-stop daemon and rm -rf /opt/nessus
-
-## Step 3 : INSTALL
-
-e install from .deb (download if wrong checksum) and start daemon
-
-## Step 4 : SET
-
-generate trial code, activate and set eveyrthing
-
-## Step 5 : RESTORE
-
-restore all *.nessus reports
