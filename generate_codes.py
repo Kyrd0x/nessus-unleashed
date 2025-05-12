@@ -29,7 +29,7 @@ def renew_tor_identity_and_get_session():
     # Fetch IP
     try:
         ip = session.get('https://icanhazip.com', timeout=10).text.strip()
-        print(f"[INFO] New TOR IP: {ip}")
+        print(f"[INFO] New Tor IP: {ip}")
     except Exception as e:
         print(f"[ERROR] Failed to fetch IP: {e}")
 
@@ -110,11 +110,11 @@ def generate_nessus_key(app_type, session):
             activation_code = matches.group(1)
             return activation_code
         except AttributeError:
-            print("Failed to retrieve Nessus Activation Code. Response:", response.text)
+            # print("Failed to retrieve Nessus Activation Code. Response:", response.text)
             return None
     else:
-        print("Request failed. Status code:", response.status_code)
-        print("Response text:", response.text)
+        # print("Request failed. Status code:", response.status_code)
+        # print("Response text:", response.text)
         return None
 
 def parse_args():
@@ -163,7 +163,6 @@ if __name__ == "__main__":
                     else:
                         print(f"[INFO] Rate limit exceeded or error occurred. Renewing Tor identity...")
                         session, public_ip = renew_tor_identity_and_get_session()
-                        print(f"[INFO] New IP: {public_ip}")
     except IOError as e:
         print(f"[ERROR] Could not write to file '{args.output_file}': {e}")
         sys.exit(1)

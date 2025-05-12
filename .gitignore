@@ -1,3 +1,6 @@
 *.deb
 .env
 env/
+
+demo.txt
+codes.txt
