@@ -139,7 +139,7 @@ if __name__ == "__main__":
     pretty_type=args.type[0].upper() + args.type[1:]
 
     print(f"Generating {args.quantity} Nessus {pretty_type} activation codes into '{args.output_file}'...")
-    
+
     try:
         session, public_ip = renew_tor_identity_and_get_session()
     except Exception as e:
@@ -168,5 +168,5 @@ if __name__ == "__main__":
         print(f"[ERROR] Could not write to file '{args.output_file}': {e}")
         sys.exit(1)
 
-    print("Generation complete.")
-    print(f"Codes saved to '{args.output_file}'.")  
+    print("Generation complete")
+    print(f"Codes saved to '{args.output_file}'")  

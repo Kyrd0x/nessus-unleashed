@@ -2,7 +2,7 @@
 
 ## Example
 
-*screenshot to put*
+![Example](images/example.png)
 
 ## Installation
 
