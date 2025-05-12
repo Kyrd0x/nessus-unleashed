@@ -1,5 +1,3 @@
-requests
-requests[socks]
-requests[security]
+requests[socks,security]
 cryptography
 stem
