@@ -138,13 +138,13 @@ if __name__ == "__main__":
     args = parse_args()
     pretty_type=args.type[0].upper() + args.type[1:]
 
+    print(f"Generating {args.quantity} Nessus {pretty_type} activation codes into '{args.output_file}'...")
+    
     try:
         session, public_ip = renew_tor_identity_and_get_session()
     except Exception as e:
         print(f"[ERROR] Could not renew Tor identity: {e}")
         sys.exit(1)
-
-    print(f"Generating {args.quantity} Nessus {pretty_type} activation codes into '{args.output_file}'...")
 
     try:
         with open(args.output_file, "w") as f:

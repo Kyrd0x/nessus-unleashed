@@ -6,6 +6,8 @@
 
 ## Installation
 
+### Tor setup
+
 First step is to setup **Tor**, for debian based system simply
 
 ```bash
@@ -18,21 +20,29 @@ ControlPort 9051
 CookieAuthentication 1
 ```
 
-Then you need to add your user to the tor group and reload the service for the previous changes to occur
+Then you need to add your user to the ```debian-tor``` group and **log out and back in** for the changes to take effect.
 
- ```bash
+```bash
 sudo usermod -a -G debian-tor $USER
+```
+
+Finally, restart the tor service
+```bash
 sudo systemctl restart tor
 ```
 
-Finally refresh your user session by re openning your shell
+### Python setup
 
-Now clone the repo and setup a Python environment as usual
+Now clone the repo
 
 ```bash
 git clone https://github.com/Kyrd0x/nessus-unleashed
 cd nessus-unleashed
+```
 
+And setup a Python environment as usual
+
+```bash
 python3 -m venv env
 source env/bin/activate
 pip install -r requirements.txt
