@@ -129,7 +129,7 @@ def parse_args():
     )
 
     parser.add_argument("-q", "--quantity", type=int, dest="quantity", default=5, help="Quantity to generate. (default: 5).")
-    parser.add_argument("-t", "--type", type=str, dest="type", choices=['essentials', 'pro', 'expert'], default="essentials", help="Nessus License Type. [essentials, pro, expert] (default: Essential).")
+    parser.add_argument("-t", "--type", type=str, dest="type", choices=['essentials', 'pro', 'expert'], default="essentials", help="Nessus License Type. [essentials, pro, expert] (default: essentials).")
     parser.add_argument("-o", "--output", type=str, dest="output_file", default="codes.txt", help="Output TXT file. (default: codes.txt).")
 
     return parser.parse_args()
